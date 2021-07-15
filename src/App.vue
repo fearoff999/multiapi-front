@@ -1,28 +1,57 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-app-bar class="teal lighten-4 font-weight-bold" dense>
+      <v-toolbar-title class="text-center">
+        MultiAPI available projects
+      </v-toolbar-title>
+    </v-app-bar>
+    <v-layout>
+      <v-container>
+        <v-row>
+          <v-col v-for="(col, colInd) in items" :key="colInd">
+            <m-a-card :item="col" />
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-layout>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import MACard from './components/MACard.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    MACard,
+  },
+  data: () => ({
+    items: [],
+  }),
+  mounted() {
+    if (window.items) {
+      this.items = window.items;
+    }
   },
 };
 </script>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang='sass'>
+header.v-toolbar
+  display: flex
+  justify-content: flex-start
+  max-height: 48px
+  .v-toolbar__content
+    max-width: 100%
+    width: 100%
+    > *
+      max-width: 100%
+      width: 100%
+.container
+  .row
+    .col
+      max-width: 33%
+      width: 33%
+      flex-grow: 0
+      flex-basis: auto
 </style>
